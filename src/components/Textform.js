@@ -40,10 +40,7 @@ export default function Textform(props) {
     if (text === "") {
       props.showAlert(" Kuch hai hi nhi copy karne ko", "danger");
     } else {
-      let cpy = document.getElementById("myBox");
-      cpy.select();
-      navigator.clipboard.writeText(cpy.value);
-      document.getSelection().removeAllRanges();
+      navigator.clipboard.writeText(text.value);
       props.showAlert(" Copied!", "primary");
     }
   };
