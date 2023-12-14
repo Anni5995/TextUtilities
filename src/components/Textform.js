@@ -43,6 +43,7 @@ export default function Textform(props) {
       let cpy = document.getElementById("myBox");
       cpy.select();
       navigator.clipboard.writeText(cpy.value);
+      document.getSelection().removeAllRanges();
       props.showAlert(" Copied!", "primary");
     }
   };
@@ -74,27 +75,27 @@ export default function Textform(props) {
             id="myBox"
             rows="8"
             style={{
-              backgroundColor: props.mode === "dark" ? "grey" : "white",
+              backgroundColor: props.mode === "dark" ? "#cdd5dda8" : "white",
               color: props.mode === "dark" ? "white" : "black",
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleCapsClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleCapsClick}>
           Capital Kardo
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleSmlClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleSmlClick}>
           Small Kardo
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleClrClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleClrClick}>
           Saaf Kardo
         </button>
-        <button className="btn btn-success mx-1" onClick={speak}>
+        <button className="btn btn-success mx-1 my-1" onClick={speak}>
           Padhlo
         </button>
-        <button className="btn btn-primary mx-1" onClick={copy}>
+        <button className="btn btn-primary mx-1 my-1" onClick={copy}>
           Copy Kar
         </button>
-        <button className="btn btn-primary mx-1" onClick={spc}>
+        <button className="btn btn-primary mx-1 my-1" onClick={spc}>
           Space Hata
         </button>
       </div>
@@ -107,11 +108,8 @@ export default function Textform(props) {
           <b>{text.trim() === "" ? 0 : text.match(/\S+/g).length}</b> words and{" "}
           <b>{text.replace(/\s+/g, "").length}</b> characters
         </p>
-        {/* <p>
-          <b>{text.split(" ").length}</b> words, <b>{text.length}</b> characters
-        </p> */}
         <p>
-          <b>{0.008 * text.split(" ").length}</b> Minutes to read
+          <b>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length}</b> Minutes to read
         </p>
         <h2>Preview</h2>
         <p>{text === "" ? "Kuch Likho Yarr" : text}</p>
